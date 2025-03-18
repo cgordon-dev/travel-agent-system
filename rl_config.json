@@ -1,0 +1,75 @@
+{
+    "buffer_size": 100000,
+    "storage_path": "./rl_data",
+    "model_dir": "./rl_models",
+    "logging_level": "INFO",
+    "training": {
+        "batch_size": 64,
+        "training_frequency": 100,
+        "min_experiences": 500,
+        "save_frequency": 10,
+        "validation_split": 0.2
+    },
+    "reward_weights": {
+        "user_satisfaction": 1.0,
+        "itinerary_quality": 0.8,
+        "booking_efficiency": 0.7,
+        "monitoring_effectiveness": 0.6
+    },
+    "agent_parameters": {
+        "user_interaction_agent": {
+            "intent_confidence_threshold": 0.7,
+            "conversation_context_window": 5
+        },
+        "planning_agent": {
+            "preference_weight": 0.7,
+            "budget_weight": 0.8,
+            "diversity_weight": 0.5
+        },
+        "booking_agent": {
+            "price_weight": 0.6,
+            "rating_weight": 0.4,
+            "booking_retry_limit": 3
+        },
+        "monitoring_agent": {
+            "price_alert_threshold": 0.1,
+            "monitoring_frequency_hours": 12
+        }
+    },
+    "production": {
+        "feedback_collection": true,
+        "feedback_prompt_frequency": 3,
+        "system_monitoring_interval": 60,
+        "model_backup_frequency": 1000,
+        "max_concurrent_requests": 50,
+        "request_timeout": 30
+    },
+    "data_privacy": {
+        "anonymize_user_data": true,
+        "retention_period_days": 90,
+        "encryption_enabled": true
+    },
+    "api_integration": {
+        "amadeus": {
+            "enabled": true,
+            "rate_limit": 100,
+            "timeout": 5
+        },
+        "sabre": {
+            "enabled": true,
+            "rate_limit": 100,
+            "timeout": 5
+        },
+        "rentalcars": {
+            "enabled": true,
+            "rate_limit": 100,
+            "timeout": 5
+        }
+    },
+    "feature_flags": {
+        "enable_new_policy_types": false,
+        "enable_advanced_feedback_analysis": true,
+        "enable_cross_session_learning": true,
+        "enable_a_b_testing": true
+    }
+}
