@@ -43,7 +43,7 @@ All agents share a centralized team memory and communicate through strongly-type
 
 ### Reinforcement Learning Framework
 
-![RL Architecture](https://github.com/yourusername/travel-agent-team/raw/main/docs/images/rl_architecture.png)
+![RL Architecture](https://github.com/cgordon-dev/travel-agent-team/raw/main/docs/images/rl_architecture.png)
 
 The RL system provides continuous improvement through:
 
@@ -91,7 +91,7 @@ travel-agent-team/
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/travel-agent-team.git
+git clone https://github.com/cgordon-dev/travel-agent-team.git
 cd travel-agent-team
 
 # Install dependencies
