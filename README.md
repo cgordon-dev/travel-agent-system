@@ -304,10 +304,10 @@ If you use this code in your research, please cite:
 
 ```
 @software{travelgraph2023,
-  author = {Your Name},
+  author = {Carl Gordon},
   title = {TravelGraph: Multi-Agent Travel Planning System with Reinforcement Learning},
   year = {2023},
-  url = {https://github.com/yourusername/travel-agent-team}
+  url = {https://github.com/cgordon-dev/travel-agent-team}
 }
 ```
 
