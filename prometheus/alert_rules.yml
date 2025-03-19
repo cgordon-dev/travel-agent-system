@@ -1,0 +1,29 @@
+groups:
+  - name: travel_agent_alerts
+    rules:
+      - alert: TravelAgentHighErrorRate
+        expr: rate(travel_agent_requests_errors_total[5m]) / rate(travel_agent_requests_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: High error rate in Travel Agent API
+          description: Travel Agent API has a high error rate (> 10%) for more than 5 minutes.
+
+      - alert: TravelAgentHighLatency
+        expr: sum(rate(travel_agent_request_duration_seconds_sum[5m])) / sum(rate(travel_agent_request_duration_seconds_count[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: High average latency in Travel Agent API
+          description: Travel Agent API has an average request latency above 2 seconds for more than 5 minutes.
+
+      - alert: TravelAgentDown
+        expr: up{job="travel_agent"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Travel Agent service is down
+          description: The Travel Agent service has been down for more than 1 minute.

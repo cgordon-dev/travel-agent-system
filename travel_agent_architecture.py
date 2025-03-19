@@ -11,6 +11,15 @@ from enum import Enum
 from pydantic import BaseModel, Field, validator, ConfigDict
 from langgraph.graph import StateGraph, END
 from pydanticai import Agent, System, Tool, model
+from dotenv import load_dotenv
+try:
+    from llm_config import initialize_llm_config, get_llm_config, LLMProvider, ModelType
+    llm_config_available = True
+except ImportError:
+    llm_config_available = False
+
+# Load environment variables
+load_dotenv()
 
 # =============================================
 # Core Data Models with PydanticAI Integration
@@ -556,8 +565,15 @@ class DataEncryption:
 class TravelPlanningSystem:
     """Main system class that integrates all components"""
     
-    def __init__(self):
+    def __init__(self, llm_config_override=None):
         """Initialize the system"""
+        # Initialize LLM configuration if available
+        if llm_config_available:
+            self.llm_config = initialize_llm_config(llm_config_override)
+            self._configure_pydanticai()
+        else:
+            self.llm_config = None
+        
         self.workflow = create_multi_agent_graph()
         self.team_memory = TeamMemory(user_profile=UserPreference())
         
@@ -571,6 +587,50 @@ class TravelPlanningSystem:
         
         # Security
         self.security = DataEncryption()
+    
+    def _configure_pydanticai(self):
+        """Configure PydanticAI with our LLM settings"""
+        if not self.llm_config:
+            return
+            
+        # Set global PydanticAI configuration
+        try:
+            from pydanticai import configure
+            pydanticai_config = self.llm_config.get_pydanticai_config()
+            configure(**pydanticai_config)
+        except (ImportError, Exception) as e:
+            print(f"Warning: Could not configure PydanticAI: {e}")
+            
+    def configure_agent_provider(self, agent_name, provider):
+        """Configure a specific agent to use a different LLM provider
+        
+        Args:
+            agent_name: Name of the agent to configure
+            provider: LLM provider to use
+        """
+        if not self.llm_config:
+            return
+            
+        try:
+            self.llm_config.switch_agent_provider(agent_name, provider)
+            self._configure_pydanticai()
+        except Exception as e:
+            print(f"Warning: Could not configure agent provider: {e}")
+    
+    def get_current_llm_configuration(self):
+        """Get the current LLM configuration
+        
+        Returns:
+            Dictionary with current LLM configuration details
+        """
+        if not self.llm_config:
+            return {"status": "LLM configuration not available"}
+            
+        return {
+            "available_providers": [p.value for p in self.llm_config.get_available_providers()],
+            "agent_providers": {k: v.value for k, v in self.llm_config.agent_providers.items()},
+            "agent_model_types": {k: v.value for k, v in self.llm_config.agent_model_types.items()},
+        }
     
     def process_user_request(self, user_id: str, user_input: str) -> Dict[str, Any]:
         """Process a user request through the multi-agent system"""

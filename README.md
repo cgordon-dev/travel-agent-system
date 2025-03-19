@@ -1,22 +1,64 @@
-# TravelGraph: Multi-Agent Travel Planning System with Reinforcement Learning
+# TravelGraph: Multi-Agent Travel Planning System
 
-[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
-[![LangGraph](https://img.shields.io/badge/langgraph-0.0.33%2B-orange)](https://github.com/langchain-ai/langgraph)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)
+![LangGraph](https://img.shields.io/badge/langgraph-0.0.33%2B-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-A production-ready AI architecture for autonomous travel planning, combining specialized agents, LangGraph orchestration, and PydanticAI data validation with a continuous learning reinforcement learning framework.
+A production-ready AI system for autonomous travel planning, combining specialized agents, LangGraph orchestration, PydanticAI data validation, and a continuous learning reinforcement framework.
 
-## 🌟 Key Features
+![TravelGraph System Architecture](docs/images/system_architecture.png)
+
+## 🔑 Key Features
 
 - **Multi-Agent Architecture**: Specialized agents collaborate to handle different aspects of travel planning
+- **LLM Provider Diversity**: Support for different LLM providers (OpenAI, Anthropic, Azure) for each agent
 - **Continuous Learning**: RL framework optimizes agent performance over time based on feedback
 - **Structured Knowledge**: PydanticAI ensures type safety and valid data across the entire system
-- **Production Ready**: Full integration with web services, data storage, and monitoring
-- **Privacy Focused**: Built-in compliance with data privacy regulations
+- **Web UI**: User-friendly interface for interacting with the agent team
+- **Monitoring**: Prometheus and Grafana integration for performance monitoring
+- **Dockerized**: Easy deployment with Docker Compose
 
-## 📋 System Overview
+## 🚀 Quick Start
 
-TravelGraph combines four specialized agents to provide end-to-end travel planning services:
+### Prerequisites
+
+- Docker and Docker Compose
+- API keys for at least one LLM provider (OpenAI, Anthropic)
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/travel-agent-team.git
+   cd travel-agent-team
+   ```
+
+2. Configure API keys:
+   ```bash
+   cp .env.example .env
+   # Edit .env to add your OpenAI and/or Anthropic API keys
+   ```
+
+3. Start the services:
+   ```bash
+   chmod +x start.sh
+   ./start.sh
+   ```
+
+4. Access the Web UI:
+   - URL: http://localhost:8000
+   - Default login: `admin` / `travel123`
+
+### Security Note
+
+For production deployment, make sure to:
+- Change the default API credentials in the `.env` file
+- Use secure values for all passwords
+- Configure proper HTTPS for all services
+
+## 🧠 System Components
+
+### Multi-Agent Team
 
 | Agent | Responsibility | Learning Focus |
 |-------|---------------|---------------|
@@ -25,22 +67,27 @@ TravelGraph combines four specialized agents to provide end-to-end travel planni
 | **Booking Agent** | Manages reservations across travel services | Price optimization, booking success |
 | **Monitoring Agent** | Tracks price changes and booking status | Alert prioritization, issue detection |
 
-All agents share a centralized team memory and communicate through strongly-typed message passing with LangGraph orchestrating their workflow.
+### LLM Provider Diversity
 
-## 🏗️ Architecture Components
+Each agent can use a different LLM provider:
+- OpenAI (GPT-3.5/4/4o)
+- Anthropic (Claude models)
+- Azure OpenAI
 
-### Multi-Agent Communication Framework
+This enables diversity of thought, optimization of costs, and resilience against provider outages.
 
-- **Message Passing Protocol**: Structured agent communication via the `AgentMessage` model
-- **Dynamic Workflow**: LangGraph enables conditional branching, looping, and feedback paths
-- **Shared Knowledge**: Team memory with access to all relevant context across agents
+### Services
 
-### Data Validation System
+- **Web UI**: User interface for planning trips and managing configurations
+- **API Server**: Flask-based API with authentication
+- **Prometheus**: Metrics collection
+- **Grafana**: Dashboards and visualizations
+- **Node Exporter**: Host metrics
+- **cAdvisor**: Container metrics
 
-- **Strongly-Typed Models**: Comprehensive Pydantic models for all data structures
-- **Dynamic Schema Evolution**: Models adapt as agents learn new preferences and patterns
-- **Validation Guards**: Built-in validation prevents hallucination and data corruption
+## 💻 Development
 
+<<<<<<< HEAD
 ### Reinforcement Learning Framework
 
 ![RL Architecture](https://github.com/cgordon-dev/travel-agent-team/raw/main/docs/images/rl_architecture.png)
@@ -72,232 +119,99 @@ The RL system provides continuous improvement through:
 - **Security Features**: Data encryption and privacy compliance
 
 ## 📂 Project Structure
+=======
+### Project Structure
+>>>>>>> ad2ad87 (added monitoring scripts and setup via prometheus and grafana)
 
 ```
 travel-agent-team/
 ├── travel_agent_architecture.py  # Core multi-agent system
 ├── pydantic_models.py            # Data validation models
 ├── reinforcement_learning.py     # RL framework components
-├── integration_example.py        # Production integration example
-├── langgraph_workflow.py         # Workflow visualization
-├── example_usage.py              # Usage examples
-├── requirements.txt              # Dependencies
-└── rl_config.json                # Configuration file
+├── api_server.py                 # API and Web UI server
+├── llm_config.py                 # LLM provider configuration
+├── ui/                           # Web interface
+├── docker-compose.yaml           # Docker deployment config
+├── prometheus/                   # Prometheus configuration
+├── grafana/                      # Grafana dashboards
+└── requirements.txt              # Dependencies
 ```
 
-## 🚀 Getting Started
+### Environment Variables
 
-### Installation
+The following environment variables can be set in the `.env` file:
+
+```
+# LLM Provider API Keys
+OPENAI_API_KEY=your_openai_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# API Authentication
+API_USERNAME=admin
+API_PASSWORD=secure_password_here
+
+# Azure OpenAI (Optional)
+AZURE_OPENAI_API_KEY=your_azure_openai_api_key_here
+AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com/
+AZURE_OPENAI_API_VERSION=2023-05-15
+AZURE_OPENAI_DEPLOYMENT_FAST=your-gpt35-deployment-name
+AZURE_OPENAI_DEPLOYMENT_BALANCED=your-gpt4-deployment-name
+AZURE_OPENAI_DEPLOYMENT_POWERFUL=your-gpt4o-deployment-name
+```
+
+### Running Tests
 
 ```bash
+<<<<<<< HEAD
 # Clone the repository
 git clone https://github.com/cgordon-dev/travel-agent-team.git
 cd travel-agent-team
+=======
+# Run unit tests
+pytest tests/
+>>>>>>> ad2ad87 (added monitoring scripts and setup via prometheus and grafana)
 
-# Install dependencies
-pip install -r requirements.txt
+# Run API tests
+pytest tests/test_api.py
 ```
 
-### Basic Usage
+## 📊 Monitoring
 
-```python
-from travel_agent_architecture import TravelPlanningSystem
+### Metrics
 
-# Initialize the system
-system = TravelPlanningSystem()
+The system exposes Prometheus metrics at http://localhost:8001, including:
 
-# Process a user request
-result = system.process_user_request(
-    user_id="user123",
-    user_input="I want to plan a weekend trip to Barcelona in March. We love food tours and need a hotel near the beach."
-)
+- Request counts and latencies
+- Error rates
+- LLM token usage by provider
+- Agent activity metrics
+- User statistics
 
-print(f"Itinerary: {result['itinerary']['title']}")
-print(f"Total cost: ${result['itinerary']['total_cost']}")
-```
+### Dashboards
 
-### With Reinforcement Learning
+Grafana dashboards are available at http://localhost:3000 (login: admin / travel_agent_admin):
 
-```python
-from reinforcement_learning import RLEnhancedTravelSystem
-from travel_agent_architecture import TravelPlanningSystem
+- System Overview
+- LLM Provider Statistics
+- Reinforcement Learning Metrics
+- User Activity
 
-# Initialize base system
-base_system = TravelPlanningSystem()
+## 📚 Documentation
 
-# Enhance with RL capabilities
-rl_system = RLEnhancedTravelSystem(base_system, "rl_config.json")
+- [Docker Setup](DOCKER_README.md)
+- [LLM Configuration](LLM_CONFIG_README.md)
+- [API Documentation](docs/API.md)
+- [Reinforcement Learning Framework](docs/RL_FRAMEWORK.md)
 
-# Process user request with RL enhancement
-result = rl_system.process_user_request(
-    user_id="user123",
-    user_input="I need a business trip to Tokyo next month with meetings in Shinjuku."
-)
+## 🤝 Contributing
 
-# Provide explicit feedback
-rl_system.provide_explicit_feedback("user123", {
-    "satisfaction_score": 4.5,
-    "itinerary_rating": 4.8,
-    "booking_experience": 4.2,
-    "comments": "Great itinerary but booking process could be smoother"
-})
-
-# View performance metrics
-metrics = rl_system.get_performance_metrics()
-print(metrics)
-```
-
-### Production Deployment
-
-```python
-from integration_example import ProductionSystemServer
-
-# Create production server
-server = ProductionSystemServer("production_config.json")
-
-# Start server (in real deployment, use a production WSGI/ASGI server)
-server.start(port=8000)
-```
-
-## ⚙️ Configuration
-
-TravelGraph is highly configurable through the `rl_config.json` file:
-
-```json
-{
-    "buffer_size": 100000,
-    "training": {
-        "batch_size": 64,
-        "training_frequency": 100,
-        "min_experiences": 500
-    },
-    "reward_weights": {
-        "user_satisfaction": 1.0,
-        "itinerary_quality": 0.8,
-        "booking_efficiency": 0.7
-    },
-    "agent_parameters": {
-        "user_interaction_agent": {
-            "intent_confidence_threshold": 0.7
-        }
-    },
-    "production": {
-        "feedback_collection": true,
-        "feedback_prompt_frequency": 3
-    }
-}
-```
-
-## 📊 System Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       User Interface                            │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    Production Travel System                     │
-│  ┌───────────────┐   ┌───────────────┐   ┌───────────────────┐  │
-│  │ User Database │   │  RL Controller │   │ Performance Monitor │
-│  └───────┬───────┘   └───────┬───────┘   └─────────┬─────────┘  │
-│          │                   │                     │            │
-└──────────┼───────────────────┼─────────────────────┼────────────┘
-           │                   │                     │
-           ▼                   ▼                     ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                    RL-Enhanced Travel System                      │
-│  ┌────────────────┐  ┌───────────────┐  ┌────────────────────┐   │
-│  │Experience Buffer│  │ Reward Function│  │Policy Optimization│   │
-│  └────────┬───────┘  └───────┬───────┘  └─────────┬──────────┘   │
-│           │                  │                    │               │
-└───────────┼──────────────────┼────────────────────┼───────────────┘
-            │                  │                    │
-            ▼                  ▼                    ▼
-┌───────────────────────────────────────────────────────────────────┐
-│                       Base Travel System                           │
-│  ┌─────────────────┐    ┌─────────────┐    ┌─────────────────┐    │
-│  │User Interaction │    │  Planning   │    │    Booking      │    │
-│  │     Agent       │───▶│    Agent    │───▶│     Agent       │    │
-│  └─────────────────┘    └─────────────┘    └────────┬────────┘    │
-│                                                     │              │
-│                                                     ▼              │
-│                                            ┌─────────────────┐    │
-│                                            │   Monitoring    │    │
-│                                            │     Agent       │    │
-│                                            └─────────────────┘    │
-│                         ┌─────────────┐                           │
-│                         │ Team Memory │                           │
-│                         └─────────────┘                           │
-└───────────────────────────────────────────────────────────────────┘
-                               │
-                               ▼
-┌───────────────────────────────────────────────────────────────────┐
-│                       External Services                            │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ ┌─────────────┐│
-│  │   Amadeus   │  │    Sabre    │  │ Rentalcars  │ │  KaibanJS   ││
-│  └─────────────┘  └─────────────┘  └─────────────┘ └─────────────┘│
-└───────────────────────────────────────────────────────────────────┘
-```
-
-## 🧠 Learning Mechanisms
-
-### User Preference Learning
-
-The system continuously learns user preferences in several ways:
-
-1. **Explicit Preferences**: Direct statements about preferences
-2. **Implicit Preferences**: Choices and reactions to options
-3. **Dynamic Schema Evolution**: Adds new preference types as discovered
-4. **Cross-Session Learning**: Applies learnings over time
-
-### Agent Parameter Optimization
-
-Each agent's behavior is controlled by parameters that are optimized through RL:
-
-```python
-# Parameters tuned through reinforcement learning
-parameters = {
-    "intent_confidence_threshold": 0.7,  # When to request clarification
-    "preference_weight": 0.8,           # Importance of matching preferences
-    "budget_weight": 0.7,               # Importance of budget constraints
-    "price_alert_threshold": 0.1        # % change to trigger price alerts
-}
-```
-
-The RL system systematically explores parameter variations and reinforces those that lead to better outcomes.
-
-## 🔧 Extending The System
-
-### Adding New Agent Types
-
-1. Create a new agent class inheriting from the base `Agent` class
-2. Define its reward function in `RewardFunction`
-3. Add policy logic in `RuleBasedPolicy`
-4. Register the agent in the LangGraph workflow
-
-### Creating Custom Reward Functions
-
-```python
-def calculate_custom_reward(data: Dict[str, Any]) -> float:
-    """Calculate custom reward based on specific metrics"""
-    score = 0.0
-    
-    # Add reward logic based on your specific domain
-    if data.get("success", False):
-        score += 1.0
-    
-    # Add penalties for issues
-    if data.get("errors", 0) > 0:
-        score -= 0.5
-        
-    return max(0.0, min(score, 2.0))  # Clamp between 0 and 2
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+<<<<<<< HEAD
 ## 📚 Citation
 
 If you use this code in your research, please cite:
@@ -311,8 +225,15 @@ If you use this code in your research, please cite:
 }
 ```
 
+=======
+>>>>>>> ad2ad87 (added monitoring scripts and setup via prometheus and grafana)
 ## 🙏 Acknowledgments
 
 - [LangChain](https://github.com/langchain-ai/langchain) for LangGraph
 - [Pydantic](https://github.com/pydantic/pydantic) for data validation
+<<<<<<< HEAD
 - The reinforcement learning community for algorithms and best practices
+=======
+- [Flask](https://flask.palletsprojects.com/) for the web server
+- [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) for monitoring
+>>>>>>> ad2ad87 (added monitoring scripts and setup via prometheus and grafana)
